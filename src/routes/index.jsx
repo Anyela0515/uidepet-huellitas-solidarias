@@ -6,6 +6,7 @@ import RegistroFundacionPage from "../pages/RegistroFundacion";
 import DashboardPage from "../pages/Dashboard";
 import LayoutPage from "../pages/admin/Layout";
 import ManageMascotasPage from "../pages/admin/ManageMascotas";
+import ManageSolicitudesPage from "../pages/admin/ManageSolicitudes";
 import SessionAdmin from "./SessionAdmin";
 
 function AppRouters() {
@@ -21,6 +22,7 @@ function AppRouters() {
         <Route path="/admin" element={<LayoutPage />}>
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="mascotas" element={<ManageMascotasPage />} />
+          <Route path="solicitudes" element={<ManageSolicitudesPage />} />
         </Route>
       </Route>
       <Route path="/perfil" element={<h1>Perfil de usuario</h1>} />
