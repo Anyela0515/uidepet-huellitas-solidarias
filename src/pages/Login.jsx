@@ -47,9 +47,9 @@ function LoginPage() {
       useLocalStorage.save("user", user);
 
       if (user.rol === "fundacion") {
-        navigate("/dashboard-fundacion");
+        navigate("/admin/dashboard");
       } else {
-        navigate("/perfil");
+        navigate("/dashboard");
       }
     } else {
       alert("Credenciales incorrectas.");
