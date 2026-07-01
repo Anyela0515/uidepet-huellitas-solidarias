@@ -2,18 +2,18 @@ import { Navigate, Outlet } from "react-router-dom";
 
 import { useLocalStorage } from "../storage/useLocalStorage";
 
-function SessionAdmin() {
+function SessionUser() {
   const sessionUser = useLocalStorage.get("user");
 
   if (!sessionUser) {
     return <Navigate to="/ingreso" replace />;
   }
 
-  if (sessionUser.rol !== "fundacion") {
-    return <Navigate to="/perfil" replace />;
+  if (sessionUser.rol !== "usuario") {
+    return <Navigate to="/admin/dashboard" replace />;
   }
 
   return <Outlet />;
 }
 
-export default SessionAdmin;
+export default SessionUser;

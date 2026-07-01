@@ -1,5 +1,7 @@
 export const userModel = {
   login(correo, password) {
+    const normalizedCorreo = correo.trim().toLowerCase();
+
     const users = [
       {
         correo: "usuario@huellitas.com",
@@ -16,7 +18,8 @@ export const userModel = {
     ];
 
     return users.find(
-      (user) => user.correo === correo && user.password === password
+      (user) =>
+        user.correo === normalizedCorreo && user.password === password
     );
   },
 };

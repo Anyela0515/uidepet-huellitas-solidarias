@@ -41,15 +41,17 @@ function LoginPage() {
       return;
     }
 
-    const user = userModel.login(correo, password);
+    const user = userModel.login(correo.trim().toLowerCase(), password);
 
     if (user) {
       useLocalStorage.save("user", user);
 
       if (user.rol === "fundacion") {
         navigate("/admin/dashboard");
+      } else if (user.rol === "usuario") {
+        navigate("/perfil");
       } else {
-        navigate("/dashboard");
+        navigate("/");
       }
     } else {
       alert("Credenciales incorrectas.");

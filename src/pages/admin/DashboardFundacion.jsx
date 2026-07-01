@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -21,8 +19,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import PendingActionsIcon from "@mui/icons-material/PendingActions";
 
-import StatCard from "../components/StatCard";
-import { useLocalStorage } from "../storage/useLocalStorage";
+import StatCard from "../../components/StatCard";
+import { useLocalStorage } from "../../storage/useLocalStorage";
 
 const monthlyActivity = [
   { month: "Ene", adopciones: 4 },
@@ -55,13 +53,6 @@ const recentRequests = [
     fecha: "25/06/2026",
     estado: "Aprobada",
   },
-  {
-    id: 4,
-    solicitante: "Pedro Sánchez",
-    mascota: "Rocky",
-    fecha: "24/06/2026",
-    estado: "Pendiente",
-  },
 ];
 
 const statusColor = {
@@ -70,20 +61,9 @@ const statusColor = {
   Aprobada: "success",
 };
 
-function DashboardPage() {
-  const navigate = useNavigate();
+function DashboardFundacionPage() {
   const user = useLocalStorage.get("user");
   const maxActivity = Math.max(...monthlyActivity.map((item) => item.adopciones));
-
-  useEffect(() => {
-    if (!user) {
-      navigate("/ingreso");
-    }
-  }, [user, navigate]);
-
-  if (!user) {
-    return null;
-  }
 
   return (
     <Box>
@@ -92,17 +72,13 @@ function DashboardPage() {
           Dashboard Fundación
         </Typography>
         <Typography color="text.secondary" mt={0.5}>
-          Resumen de actividad de {user.nombre}
+          Resumen de actividad de {user?.nombre}
         </Typography>
       </Box>
 
       <Grid container spacing={2.5} sx={{ mb: 3 }}>
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <StatCard
-            title="Mascotas en adopción"
-            value="24"
-            icon={<PetsIcon />}
-          />
+          <StatCard title="Mascotas en adopción" value="24" icon={<PetsIcon />} />
         </Grid>
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           <StatCard
@@ -179,35 +155,9 @@ function DashboardPage() {
         <Grid size={{ xs: 12, lg: 7 }}>
           <Card sx={{ border: "1px solid rgba(151, 0, 79, 0.1)" }}>
             <CardContent sx={{ p: 2.5 }}>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  mb: 2,
-                  gap: 2,
-                  flexWrap: "wrap",
-                }}
-              >
-                <Typography variant="h6" fontWeight={800}>
-                  Solicitudes recientes
-                </Typography>
-                <Button
-                  variant="outlined"
-                  size="small"
-                  sx={{
-                    borderColor: "#97004F",
-                    color: "#97004F",
-                    "&:hover": {
-                      borderColor: "#7d0041",
-                      backgroundColor: "rgba(151, 0, 79, 0.04)",
-                    },
-                  }}
-                >
-                  Ver todas
-                </Button>
-              </Box>
-
+              <Typography variant="h6" fontWeight={800} mb={2}>
+                Solicitudes recientes
+              </Typography>
               <TableContainer>
                 <Table size="small">
                   <TableHead>
@@ -245,4 +195,4 @@ function DashboardPage() {
   );
 }
 
-export default DashboardPage;
+export default DashboardFundacionPage;
